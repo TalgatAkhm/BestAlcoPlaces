@@ -103,7 +103,6 @@
 /* Submenu style */
 .cbp-hssubmenu {
 	position: absolute;
-	left: 0;
 	top: 100%;
 	width: 100%;
 	z-index: 0;
@@ -123,7 +122,7 @@
 /* Let's allow 6 item in a row */
 .cbp-hssubmenu > li {
 	width: 16.2%;
-	display: inline-block;
+	display: block;
 	vertical-align: top;
 	box-shadow: -28px 0 0 -27px #ddd, 0 -28px 0 -27px #ddd;
 	opacity: 0;
@@ -150,9 +149,9 @@
 .cbp-hssubmenu > li a {
 	display: block;
 	text-align: center;
-	color: #a2a2a2;
+	color: white;
 	outline: none;
-	padding: 2em 1em 1em 1em;
+    padding-bottom: 50%;
 }
 
 .no-touch .cbp-hssubmenu > li a:hover,
@@ -177,8 +176,6 @@
 
 .cbp-hssubmenu > li a span {
 	display: block;
-	min-height: 3em;
-	margin-top: 0.4em;
 }
 
 .cbp-hsmenu > li.cbp-hsitem-open .cbp-hssubmenu {
@@ -297,6 +294,7 @@
 	.cbp-hsmenu-wrapper .cbp-hssubmenu > li {
 		box-shadow: 0 1px #cecece;
 		text-align: left;
+
 	}
 
 	.cbp-hssubmenu > li a {
