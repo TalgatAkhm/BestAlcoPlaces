@@ -21,9 +21,29 @@
             var kek;
             var heatmap;
             ymaps.ready(init);
+
+            function addMarkers(link) {
+                var parsed_data = $.getJSON(link, function(data) {
+                        for (var i = 0; i < data.length; i++) {
+                            console.log(data[i])
+                             myMap.geoObjects.add(new ymaps.Placemark(data[i].coordinates, 
+                            {
+                            balloonContent: 'Наименование: ' + data[i].name + '<br/>' + 'Дата начала лицензии: ' + data[i].lic_start + '<br/>Дата окончания лицензии: ' + data[i].lic_end + '<br/>Статус лицензии: ' + data[i].lic_status + '<br/>Расстояние до запрещенное зоны: ' + data[i].distance + '<br/>'
+                            },
+                            {
+                                iconColor: '#0095b6'
+                            }));
+                        }
+                        return data;
+                    });
+
+                
+            }
+
             function setDT(data) {
                 heatmap.setData(data);
             }
+
             function cb(data) {
                 heatmap = new kek(data);
                 heatmap.setMap(myMap);
@@ -40,10 +60,13 @@
                     center: [55.76, 37.64],
                     zoom: 7
                 });
+                    addMarkers('https://raw.githubusercontent.com/m0p3d/BestAlcoPlaces/master/markers.json');
                 ymaps.modules.require(['Heatmap'], function (Heatmap) {
                     kek = Heatmap;
                     loadDataSet('https://raw.githubusercontent.com/m0p3d/BestAlcoPlaces/master/1_copy.json').then(cb);
+                    
                 });
+
             }
         $(document).ready(function() {
             $("#best").click(function() {
@@ -55,6 +78,8 @@
                 loadDataSet('https://raw.githubusercontent.com/m0p3d/BestAlcoPlaces/master/forbidden.json').then(setDT);
             });
         });
+
+
         </script>
         <style>
             .menu_item {
